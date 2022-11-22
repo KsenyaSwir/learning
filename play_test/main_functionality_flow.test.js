@@ -1,5 +1,6 @@
 // @ts-check
 const { test, expect, chromium } = require("@playwright/test");
+
 test("add and remove element", async ({ page }) => {
   await page.goto("http://the-internet.herokuapp.com/");
   await expect(page).toHaveTitle(/The Internet/);
@@ -110,17 +111,13 @@ test("iFrames", async () => {
 
 test("Element state", async () => {
   const browser = await chromium.launch();
-  // creating a page inside browser
   const page = await browser.newPage();
-  // navigating to site
   await page.goto("https://demoqa.com/automation-practice-form");
 
-  // element handles
   const firstName = await page.$("#firstName");
   const sportsCheck = await page.$("#hobbies-checkbox-1");
   const submitBtn = await page.$("#submit");
 
-  // print the element state
   console.log(await firstName.isDisabled());
   console.log(await firstName.isEnabled());
   console.log(await firstName.isEditable());
@@ -128,4 +125,26 @@ test("Element state", async () => {
   console.log(await sportsCheck.isVisible());
   console.log(await submitBtn.isHidden());
   console.log(await submitBtn.isVisible());
+});
+
+test("Take a screenshots", async () => {
+  const browser = await chromium.launch();
+  const page = await browser.newPage();
+  await page.goto("http://the-internet.herokuapp.com");
+  await page.screenshot({ path: "screenshots/screenshot.png" });
+  await page.screenshot({
+    path: "screenshots/fullpage.png",
+    fullPage: true,
+  });
+});
+
+test("Record a video", async () => {
+  const browser = await chromium.launch();
+  const page = await browser.newPage();
+  await page.goto("http://the-internet.herokuapp.com");
+  await page.screenshot({ path: "screenshots/screenshot.png" });
+  await page.screenshot({
+    path: "screenshots/fullpage.png",
+    fullPage: true,
+  });
 });

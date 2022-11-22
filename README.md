@@ -1,6 +1,6 @@
 # learning_playwright
 
-#### Running tests using playwright from "play_test" folder:
+#### Running tests using playwright:
 ```
 npx playwright test
 ```
